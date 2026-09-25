@@ -1,0 +1,25 @@
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.env
+.venv/
+env/
+venv/
+ENV/
+
+# Static compilation output (WhiteNoise serves or generates this in cloud build)
+staticfiles/
+
+# Media uploads (user uploads)
+media/
+
+# Database
+*.sqlite3
+*.sqlite3-journal
+
+# IDEs & System
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

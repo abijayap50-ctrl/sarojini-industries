@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ selected_category.name }} | {{ profile.name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+    
+    <!-- Breadcrumb -->
+    <nav class="flex items-center space-x-2 text-xs font-mono text-slate-400">
+        <a href="{% url 'showcase:index' %}" class="hover:text-amber-400">Home</a>
+        <span>&rsaquo;</span>
+        <span class="text-white">{{ selected_category.name }}</span>
+    </nav>
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between pb-6 border-b border-slate-800 gap-4">
+        <div>
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-amber-400">{{ selected_category.badge_text }}</span>
+            <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mt-1">
+                {{ selected_category.name }}
+            </h1>
+            <p class="text-xs text-slate-400 max-w-2xl mt-2 leading-relaxed">
+                {{ selected_category.short_description }}
+            </p>
+        </div>
+        <button @click="openQuote('{{ selected_category.name|escapejs }}')"
+                class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-amber-500/20">
+            Request Custom {{ selected_category.name }} Quote
+        </button>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for project in projects %}
+        <div class="bg-[#0F172A] border border-slate-800 hover:border-amber-500/60 rounded-2xl overflow-hidden transition duration-300 hover:shadow-xl group flex flex-col justify-between">
+            <div>
+                <div class="relative h-56 bg-slate-950 overflow-hidden cursor-pointer"
+                     @click="openLightbox('{{ project.primary_image }}', '{{ project.title|escapejs }}')">
+                    <img src="{{ project.primary_image }}" alt="{{ project.title }}"
+                         class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-transparent opacity-90"></div>
+                    <span class="absolute top-3 left-3 px-2 py-0.5 rounded bg-slate-950/80 backdrop-blur text-[10px] font-mono text-emerald-400 border border-slate-700">
+                        {{ project.site_location }}
+                    </span>
+                    <span class="absolute bottom-3 right-3 px-2 py-1 rounded bg-slate-900/90 text-amber-400 text-[10px] font-mono font-bold">
+                        ★ {{ project.rating_score }} ({{ project.review_count }})
+                    </span>
+                </div>
+
+                <div class="p-5 space-y-3">
+                    <h3 class="text-base font-black text-white group-hover:text-amber-400 transition leading-snug">
+                        {{ project.title }}
+                    </h3>
+                    <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                        {{ project.description }}
+                    </p>
+
+                    <div class="space-y-1.5 pt-2 border-t border-slate-800/80 text-[11px] font-mono">
+                        <div class="flex items-center justify-between text-slate-300">
+                            <span class="text-slate-500">Steel:</span>
+                            <span class="text-white font-bold">{{ project.steel_grade }}</span>
+                        </div>
+                        <div class="flex items-center justify-between text-slate-300">
+                            <span class="text-slate-500">Size:</span>
+                            <span class="text-amber-300">{{ project.dimensions }}</span>
+                        </div>
+                        <div class="flex items-center justify-between text-slate-300">
+                            <span class="text-slate-500">Welds:</span>
+                            <span class="text-emerald-400">{{ project.weld_standard }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-5 pt-0 grid grid-cols-2 gap-2">
+                <button @click="openQuote('{{ project.title|escapejs }}')"
+                        class="py-2.5 px-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs uppercase tracking-wider transition">
+                    Get Quote
+                </button>
+                <a href="https://wa.me/{{ profile.whatsapp_number }}?text=Hello%20{{ profile.name }},%20I%20am%20interested%20in%20'{{ project.title|urlencode }}'%20shown%20on%20your%20website."
+                   target="_blank" rel="noopener noreferrer"
+                   class="py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-[#25D366] hover:text-slate-950 text-slate-300 font-bold text-xs uppercase tracking-wider border border-slate-700 transition flex items-center justify-center">
+                    WhatsApp
+                </a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-span-full py-16 text-center bg-slate-900/40 rounded-2xl border border-dashed border-slate-800 space-y-3">
+            <p class="text-sm font-bold text-white">No showcase photos uploaded in this category yet.</p>
+            <p class="text-xs text-slate-400">All {{ selected_category.name }} are custom-fabricated to order. Contact our master welder directly.</p>
+            <button @click="openQuote('{{ selected_category.name|escapejs }}')" class="px-5 py-2.5 bg-amber-500 text-slate-950 font-bold text-xs rounded-xl">
+                Request Custom {{ selected_category.name }} Quote
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

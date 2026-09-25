@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.title }} | {{ profile.name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center space-x-2 text-xs font-mono text-slate-400">
+        <a href="{% url 'showcase:index' %}" class="hover:text-amber-400">Home</a>
+        <span>&rsaquo;</span>
+        <a href="{{ project.category.get_absolute_url }}" class="hover:text-amber-400">{{ project.category.name }}</a>
+        <span>&rsaquo;</span>
+        <span class="text-white truncate max-w-sm">{{ project.title }}</span>
+    </nav>
+
+    <!-- Main 2-Column Split: Image Showcase (Left) + Engineering Specs & Direct Inquire (Right) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left Column: Primary Image & Gallery Grid (7 cols) -->
+        <div class="lg:col-span-7 space-y-4">
+            <div class="relative bg-slate-950 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl h-[420px] sm:h-[480px] cursor-pointer group"
+                 @click="openLightbox('{{ project.primary_image }}', '{{ project.title|escapejs }}')">
+                <img src="{{ project.primary_image }}" alt="{{ project.title }}"
+                     class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0A0F1D] via-transparent to-transparent opacity-80"></div>
+                <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-mono">
+                    <span class="px-3 py-1 rounded-xl bg-slate-950/90 text-amber-400 border border-slate-700">
+                        {{ project.category.badge_text }}
+                    </span>
+                    <span class="px-3 py-1 rounded-xl bg-slate-950/90 text-emerald-400 border border-slate-700">
+                        {{ project.site_location }}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Gallery Thumbnails if available -->
+            {% if gallery_images %}
+            <div class="grid grid-cols-4 gap-3 pt-2">
+                {% for gimg in gallery_images %}
+                <div class="h-24 rounded-xl overflow-hidden border border-slate-800 hover:border-amber-500 cursor-pointer transition"
+                     @click="openLightbox('{{ gimg.url }}', '{{ gimg.caption|default:project.title|escapejs }}')">
+                    <img src="{{ gimg.url }}" alt="{{ gimg.caption }}" class="w-full h-full object-cover">
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Right Column: Specs, Technical Highlights & Instant Inquire (5 cols) -->
+        <div class="lg:col-span-5 space-y-6">
+            
+            <div class="space-y-2">
+                <div class="inline-flex items-center space-x-2 px-2.5 py-0.5 rounded bg-amber-500/10 text-amber-400 text-xs font-mono font-bold">
+                    <span>{{ project.category.name }}</span>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
+                    {{ project.title }}
+                </h1>
+                {% if project.subtitle %}
+                <p class="text-xs text-slate-300 leading-relaxed font-medium">
+                    {{ project.subtitle }}
+                </p>
+                {% endif %}
+                <div class="flex items-center space-x-2 text-xs text-amber-400 pt-1 font-bold">
+                    <span>★★★★★</span>
+                    <span class="text-slate-400 font-mono">({{ project.rating_score }} / 5.0 from {{ project.review_count }} site clients)</span>
+                </div>
+            </div>
+
+            <!-- Technical Specification Table -->
+            <div class="bg-[#0F172A] border border-slate-800 rounded-2xl p-5 space-y-3">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono pb-2 border-b border-slate-800">
+                    FABRICATION SPECIFICATIONS
+                </h3>
+                <div class="space-y-2.5 text-xs font-mono">
+                    <div class="flex justify-between py-1 border-b border-slate-800/60">
+                        <span class="text-slate-400">Steel Grade:</span>
+                        <span class="text-white font-bold text-right">{{ project.steel_grade }}</span>
+                    </div>
+                    <div class="flex justify-between py-1 border-b border-slate-800/60">
+                        <span class="text-slate-400">Dimensions:</span>
+                        <span class="text-amber-400 font-bold text-right">{{ project.dimensions }}</span>
+                    </div>
+                    <div class="flex justify-between py-1 border-b border-slate-800/60">
+                        <span class="text-slate-400">Wall / Sheet Gauge:</span>
+                        <span class="text-white text-right">{{ project.thickness_gauge }}</span>
+                    </div>
+                    <div class="flex justify-between py-1 border-b border-slate-800/60">
+                        <span class="text-slate-400">Weld Specification:</span>
+                        <span class="text-emerald-400 text-right">{{ project.weld_standard }}</span>
+                    </div>
+                    <div class="flex justify-between py-1 border-b border-slate-800/60">
+                        <span class="text-slate-400">Coating &amp; Primer:</span>
+                        <span class="text-slate-300 text-right">{{ project.coating_finish }}</span>
+                    </div>
+                    <div class="flex justify-between py-1 border-b border-slate-800/60">
+                        <span class="text-slate-400">Fabrication Lead Time:</span>
+                        <span class="text-white text-right">{{ project.estimated_timeline }}</span>
+                    </div>
+                    <div class="flex justify-between py-1">
+                        <span class="text-slate-400">Warranty:</span>
+                        <span class="text-emerald-400 font-bold text-right">{{ profile.warranty_years }}-Year Structural Warranty</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Description -->
+            <div class="text-xs text-slate-400 leading-relaxed space-y-2">
+                <h4 class="text-xs font-bold text-white uppercase tracking-wider font-mono">Master Welder's Notes</h4>
+                <p>{{ project.description }}</p>
+            </div>
+
+            <!-- Instant Actions Group -->
+            <div class="space-y-3 pt-2">
+                <button @click="openQuote('{{ project.title|escapejs }}')"
+                        class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-xl shadow-amber-500/20 active:scale-95 flex items-center justify-center space-x-2">
+                    <svg class="w-4 h-4 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                    <span>Request Measurement for this Item</span>
+                </button>
+
+                <a href="{{ wa_project_url }}" target="_blank" rel="noopener noreferrer"
+                   class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-[#25D366] hover:text-slate-950 text-white font-bold text-xs uppercase tracking-wider border border-slate-700 hover:border-[#25D366] transition flex items-center justify-center space-x-2 shadow-md">
+                    <span>Chat with Welder on WhatsApp &rarr;</span>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

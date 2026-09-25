@@ -1,0 +1,24 @@
+<div class="bg-[#0F172A] border border-emerald-500/50 p-8 rounded-3xl text-center space-y-4 shadow-2xl">
+    <div class="w-14 h-14 bg-emerald-500/20 text-emerald-400 rounded-2xl mx-auto flex items-center justify-center text-2xl">
+        ✓
+    </div>
+    
+    <div class="space-y-1">
+        <span class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">Request Confirmed</span>
+        <h3 class="text-2xl font-black text-white">Thank You, {{ inquiry.name }}!</h3>
+        <p class="text-xs text-slate-400 max-w-md mx-auto">
+            Your fabrication inquiry for <b class="text-white">{{ inquiry.service_interested }}</b> has been sent directly to our master welder. We will call you at <b class="text-amber-400 font-mono">{{ inquiry.phone }}</b>.
+        </p>
+    </div>
+
+    <div class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="{{ wa_url }}" target="_blank" rel="noopener noreferrer"
+           class="px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-500/20 flex items-center space-x-2">
+            <span>Forward to Welder on WhatsApp &rarr;</span>
+        </a>
+        <a href="tel:{{ profile.phone }}" 
+           class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider border border-slate-700 transition">
+            Call Workshop Directly: {{ profile.phone }}
+        </a>
+    </div>
+</div>
