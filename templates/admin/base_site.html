@@ -3,10 +3,14 @@
 
 {% block title %}{{ title }} | Sarojini Welder Portal{% endblock %}
 
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/admin_mobile_custom.css' %}">
+{% endblock %}
+
 {% block extrahead %}
 {{ block.super }}
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link rel="stylesheet" href="{% static 'css/admin_mobile_custom.css' %}">
 <script src="{% static 'js/admin_mobile_preview.js' %}" defer></script>
 {% endblock %}
 

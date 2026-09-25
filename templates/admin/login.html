@@ -1,0 +1,174 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block title %}{% if form.errors %}{% translate "Error:" %} {% endif %}Welder Sign In | Sarojini Steel Works{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'admin/css/login.css' %}">
+<link rel="stylesheet" href="{% static 'css/admin_mobile_custom.css' %}">
+<style>
+    /* Direct High-Contrast Login Overrides */
+    body.login {
+        background: #090d16 !important;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+    body.login #container {
+        background: #0f172a !important;
+        border: 1px solid #334155 !important;
+        border-radius: 20px !important;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 25px rgba(245, 158, 11, 0.15) !important;
+        width: 92% !important;
+        max-width: 440px !important;
+        overflow: hidden !important;
+        margin: 40px auto !important;
+    }
+    body.login #header {
+        background: #111827 !important;
+        border-bottom: 1px solid #1e293b !important;
+        padding: 20px !important;
+        text-align: center !important;
+    }
+    body.login #content {
+        background: #0f172a !important;
+        padding: 24px !important;
+    }
+    body.login .form-row {
+        background: transparent !important;
+        border: none !important;
+        padding: 10px 0 !important;
+    }
+    body.login label {
+        color: #ffffff !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.03em !important;
+        margin-bottom: 8px !important;
+        display: block !important;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+    body.login input[type="text"],
+    body.login input[type="password"] {
+        background: #020617 !important;
+        border: 1.5px solid #334155 !important;
+        border-radius: 10px !important;
+        color: #ffffff !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        padding: 14px 16px !important;
+        min-height: 52px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        display: block !important;
+    }
+    body.login input[type="text"]:focus,
+    body.login input[type="password"]:focus {
+        border-color: #f59e0b !important;
+        background: #090d16 !important;
+        box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3) !important;
+        outline: none !important;
+    }
+    body.login .submit-row {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 20px 0 0 0 !important;
+        margin: 0 !important;
+        position: static !important;
+    }
+    body.login .submit-row input[type="submit"] {
+        background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+        color: #020617 !important;
+        font-size: 16px !important;
+        font-weight: 900 !important;
+        letter-spacing: 0.06em !important;
+        text-transform: uppercase !important;
+        border: none !important;
+        border-radius: 12px !important;
+        width: 100% !important;
+        min-height: 52px !important;
+        box-shadow: 0 4px 16px rgba(245, 158, 11, 0.45) !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+    }
+    body.login .submit-row input[type="submit"]:hover,
+    body.login .submit-row input[type="submit"]:active {
+        background: #fbbf24 !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 6px 24px rgba(245, 158, 11, 0.65) !important;
+    }
+    .login-helper-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .login-helper-header h3 {
+        color: #f8fafc;
+        font-size: 17px;
+        font-weight: 800;
+        margin: 0 0 6px 0;
+    }
+    .login-helper-header p {
+        color: #94a3b8;
+        font-size: 13px;
+        margin: 0;
+    }
+</style>
+{{ form.media }}
+{% endblock %}
+
+{% block bodyclass %}{{ block.super }} login{% endblock %}
+
+{% block usertools %}{% endblock %}
+{% block nav-global %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+{% block content_title %}{% endblock %}
+{% block nav-breadcrumbs %}{% endblock %}
+
+{% block content %}
+<div class="login-helper-header">
+    <h3>Welder Workshop Control</h3>
+    <p>Sign in to upload photos, manage projects, and view client inquiries.</p>
+</div>
+
+{% if form.errors and not form.non_field_errors %}
+<p class="errornote" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; border-radius: 10px; padding: 12px 16px; font-weight: 600; margin-bottom: 16px;">
+    {% blocktranslate count counter=form.errors.items|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktranslate %}
+</p>
+{% endif %}
+
+{% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+<p class="errornote" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; border-radius: 10px; padding: 12px 16px; font-weight: 600; margin-bottom: 16px;">
+    {{ error }}
+</p>
+{% endfor %}
+{% endif %}
+
+<div id="content-main">
+{% if user.is_authenticated %}
+<p class="errornote" style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); color: #fbbf24; border-radius: 10px; padding: 12px 16px; font-weight: 600; margin-bottom: 16px;">
+    {% blocktranslate trimmed %}
+        You are authenticated as {{ username }}, but are not authorized to access this page. Would you like to login to a different account?
+    {% endblocktranslate %}
+</p>
+{% endif %}
+
+<form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+  <div class="form-row">
+    {{ form.username.errors }}
+    <label for="id_username" class="required">Username:</label>
+    {{ form.username }}
+  </div>
+  <div class="form-row">
+    {{ form.password.errors }}
+    <label for="id_password" class="required">Password:</label>
+    {{ form.password }}
+    <input type="hidden" name="next" value="{{ next }}">
+  </div>
+  <div class="submit-row">
+    <input type="submit" value="{% translate 'Log in' %}">
+  </div>
+</form>
+
+</div>
+{% endblock %}

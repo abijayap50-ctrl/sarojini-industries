@@ -425,3 +425,122 @@ select:focus {
         margin: 4px 0 !important;
     }
 }
+
+/* ==========================================================================
+   DEDICATED CRYSTAL-CLEAR LOGIN PAGE STYLING (DARK OBSIDIAN & FORGE AMBER)
+   Fixes white box and low contrast text on login
+   ========================================================================== */
+
+body.login {
+    background: #090d16 !important;
+    color: #f8fafc !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+body.login #container {
+    background: #0f172a !important;
+    border: 1px solid #334155 !important;
+    border-radius: 18px !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(245, 158, 11, 0.15) !important;
+    width: 92% !important;
+    max-width: 440px !important;
+    overflow: hidden !important;
+    margin: 20px auto !important;
+}
+
+body.login #header {
+    background: #111827 !important;
+    border-bottom: 1px solid #1e293b !important;
+    padding: 18px 20px !important;
+    text-align: center;
+}
+
+body.login #content {
+    background: #0f172a !important;
+    padding: 24px 22px !important;
+}
+
+body.login .form-row {
+    background: transparent !important;
+    border: none !important;
+    padding: 10px 0 !important;
+}
+
+body.login label {
+    color: #f8fafc !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.02em !important;
+    margin-bottom: 8px !important;
+    display: block !important;
+    opacity: 1 !important;
+}
+
+body.login input[type="text"],
+body.login input[type="password"] {
+    background: #030712 !important;
+    border: 1.5px solid #334155 !important;
+    border-radius: 10px !important;
+    color: #ffffff !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    padding: 14px 16px !important;
+    min-height: 50px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    display: block !important;
+}
+
+body.login input[type="text"]:focus,
+body.login input[type="password"]:focus {
+    border-color: #f59e0b !important;
+    background: #0b1120 !important;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.25) !important;
+    outline: none !important;
+}
+
+body.login .submit-row {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 18px 0 0 0 !important;
+    margin: 0 !important;
+    position: static !important;
+}
+
+body.login .submit-row input[type="submit"] {
+    background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+    color: #020617 !important;
+    font-size: 16px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    border: none !important;
+    border-radius: 10px !important;
+    width: 100% !important;
+    min-height: 50px !important;
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4) !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+body.login .submit-row input[type="submit"]:hover,
+body.login .submit-row input[type="submit"]:active {
+    background: #fbbf24 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 22px rgba(245, 158, 11, 0.6) !important;
+}
+
+body.login .errornote {
+    background: rgba(239, 68, 68, 0.15) !important;
+    border: 1px solid rgba(239, 68, 68, 0.4) !important;
+    color: #fca5a5 !important;
+    border-radius: 10px !important;
+    padding: 12px 16px !important;
+    font-weight: 600 !important;
+    margin-bottom: 16px !important;
+}
+
