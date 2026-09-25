@@ -16,36 +16,46 @@ class WorkshopProfileAdmin(admin.ModelAdmin):
         return not WorkshopProfile.objects.exists()
 
 
-class ProjectImageInline(admin.TabularInline):
+class ProjectImageInline(admin.StackedInline):
     model = ProjectImage
-    extra = 2
-    fields = ('image', 'image_url', 'caption', 'display_order')
+    extra = 1
+    fields = ('image', 'caption', 'display_order', 'image_url')
+    verbose_name = "Additional Gallery Photo"
+    verbose_name_plural = "Additional Gallery Photos (Upload for Slider & Blueprint)"
 
 
 @admin.register(ProjectShowcase)
 class ProjectShowcaseAdmin(admin.ModelAdmin):
-    list_display = ('preview_thumbnail', 'title', 'category', 'steel_grade', 'dimensions', 'rating_score', 'is_featured', 'is_active', 'display_order')
+    list_display = ('preview_thumbnail', 'title', 'category_badge', 'steel_grade', 'dimensions', 'rating_score', 'is_featured', 'is_active', 'display_order')
     list_filter = ('category', 'is_featured', 'is_active', 'steel_grade')
-    search_fields = ('title', 'description', 'site_location', 'specs_search')
+    search_fields = ('title', 'description', 'site_location')
     list_editable = ('display_order', 'is_featured', 'is_active')
     prepopulated_fields = {'slug': ('title',)}
     inlines = [ProjectImageInline]
     fieldsets = (
-        ("Basic Information", {
-            'fields': ('category', 'title', 'slug', 'subtitle', 'description', 'cover_image', 'cover_image_url')
+        ("📸 Main Photo & Overview", {
+            'fields': ('cover_image', 'category', 'title', 'slug', 'subtitle', 'description', 'cover_image_url'),
+            'description': "Tap the camera button to take a photo of the completed steel fabrication with your phone or select from gallery.",
         }),
-        ("Technical Specifications", {
-            'fields': ('steel_grade', 'dimensions', 'thickness_gauge', 'coating_finish', 'weld_standard', 'estimated_timeline', 'site_location')
+        ("⚙️ Structural & Technical Specifications", {
+            'fields': ('steel_grade', 'dimensions', 'thickness_gauge', 'coating_finish', 'weld_standard', 'estimated_timeline', 'site_location'),
         }),
-        ("Display & Visibility Settings", {
-            'fields': ('rating_score', 'review_count', 'is_featured', 'is_active', 'display_order')
+        ("⭐ Ratings & Visibility Settings", {
+            'fields': ('rating_score', 'review_count', 'is_featured', 'is_active', 'display_order'),
         }),
     )
 
+    def category_badge(self, obj):
+        return format_html(
+            '<span style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); padding: 2px 8px; border-radius: 9999px; font-weight: 700; font-size: 11px;">{}</span>',
+            obj.category.name
+        )
+    category_badge.short_description = "Category"
+
     def preview_thumbnail(self, obj):
         img_url = obj.primary_image
-        return format_html('<img src="{}" style="width: 50px; height: 35px; object-fit: cover; border-radius: 6px; border: 1px solid #475569;" />', img_url)
-    preview_thumbnail.short_description = "Image"
+        return format_html('<img src="{}" style="width: 54px; height: 38px; object-fit: cover; border-radius: 8px; border: 1px solid #475569; box-shadow: 0 2px 6px rgba(0,0,0,0.3);" />', img_url)
+    preview_thumbnail.short_description = "Photo"
 
 
 @admin.register(WorkCategory)

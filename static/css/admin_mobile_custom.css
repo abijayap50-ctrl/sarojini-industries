@@ -1,0 +1,427 @@
+/* ==========================================================================
+   SAROJINI STEEL WORKS • MOBILE-FRIENDLY WELDER ADMIN THEME
+   Tailored for Smartphone & Touch Interfaces
+   ========================================================================== */
+
+:root {
+    --adm-bg: #090d16;
+    --adm-surface: #111827;
+    --adm-surface-light: #1f2937;
+    --adm-border: #374151;
+    --adm-border-hover: #f59e0b;
+    --adm-text-main: #f3f4f6;
+    --adm-text-muted: #9ca3af;
+    --adm-amber: #f59e0b;
+    --adm-amber-glow: rgba(245, 158, 11, 0.25);
+    --adm-cyan: #06b6d4;
+    --adm-green: #10b981;
+    --adm-red: #ef4444;
+    --adm-radius: 12px;
+}
+
+/* Global Dark Overrides */
+html, body {
+    background-color: var(--adm-bg) !important;
+    color: var(--adm-text-main) !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#header {
+    background: #0f172a !important;
+    border-bottom: 1px solid #1e293b !important;
+    padding: 14px 18px !important;
+}
+
+#user-tools {
+    font-size: 13px !important;
+    color: var(--adm-text-muted) !important;
+}
+
+#user-tools a {
+    color: var(--adm-amber) !important;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Breadcrumbs */
+div.breadcrumbs {
+    background: #0f172a !important;
+    border-bottom: 1px solid #1f2937 !important;
+    color: var(--adm-text-muted) !important;
+    font-size: 13px !important;
+    padding: 10px 18px !important;
+}
+
+div.breadcrumbs a {
+    color: #93c5fd !important;
+}
+
+/* Main Content & Modules */
+#content {
+    padding: 16px !important;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.module {
+    background: var(--adm-surface) !important;
+    border: 1px solid var(--adm-border) !important;
+    border-radius: var(--adm-radius) !important;
+    margin-bottom: 20px !important;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+}
+
+.module caption, .module h2 {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    letter-spacing: 0.04em !important;
+    padding: 12px 16px !important;
+    border-bottom: 1px solid var(--adm-border) !important;
+}
+
+/* Forms & Fieldsets */
+fieldset {
+    background: var(--adm-surface) !important;
+    border: 1px solid var(--adm-border) !important;
+    border-radius: var(--adm-radius) !important;
+    padding: 16px !important;
+    margin-bottom: 24px !important;
+}
+
+fieldset h2 {
+    color: var(--adm-amber) !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    border-bottom: 1px solid #1f2937 !important;
+    padding-bottom: 8px !important;
+    margin-bottom: 14px !important;
+}
+
+.form-row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+    padding: 14px 0 !important;
+}
+
+label {
+    color: #e2e8f0 !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    margin-bottom: 6px !important;
+    display: block;
+}
+
+/* Text Inputs, Selects, and Textareas */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+textarea,
+select {
+    background: #0b1120 !important;
+    border: 1px solid #334155 !important;
+    border-radius: 8px !important;
+    color: #f8fafc !important;
+    padding: 12px 14px !important;
+    font-size: 15px !important;
+    min-height: 46px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    transition: all 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--adm-amber) !important;
+    box-shadow: 0 0 0 3px var(--adm-amber-glow) !important;
+    outline: none !important;
+}
+
+.help, p.help {
+    color: var(--adm-text-muted) !important;
+    font-size: 12px !important;
+    margin-top: 6px !important;
+    line-height: 1.4 !important;
+}
+
+/* ==========================================================================
+   TOUCH-OPTIMIZED PHOTO UPLOAD SYSTEM (MOBILE FRIENDLY)
+   ========================================================================== */
+
+/* File Input Container */
+.field-cover_image,
+.field-image,
+.field-attachment {
+    background: rgba(17, 24, 39, 0.8);
+    border: 2px dashed #475569;
+    border-radius: 14px;
+    padding: 16px;
+    transition: all 0.25s ease;
+    margin: 10px 0;
+    position: relative;
+}
+
+.field-cover_image:hover,
+.field-image:hover {
+    border-color: var(--adm-amber);
+    background: rgba(245, 158, 11, 0.04);
+}
+
+/* Large Mobile Touch Upload Button */
+.custom-file-upload-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border: 1px solid #475569;
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-weight: 700;
+    font-size: 15px;
+    color: #f8fafc;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+    transition: all 0.2s ease;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.custom-file-upload-btn:hover,
+.custom-file-upload-btn:active {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #020617;
+    border-color: #f59e0b;
+    box-shadow: 0 0 15px var(--adm-amber-glow);
+    transform: translateY(-1px);
+}
+
+.custom-file-upload-btn span.icon {
+    font-size: 20px;
+}
+
+/* Instant Mobile Preview Card */
+.admin-live-preview-box {
+    margin-top: 12px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #020617;
+    border: 1px solid #334155;
+    position: relative;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    max-width: 420px;
+}
+
+.admin-live-preview-box img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    background: #0f172a;
+}
+
+.admin-preview-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    color: #fbbf24;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 9px;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   STACKED INLINES FOR GALLERY PHOTOS (CARDS ON MOBILE)
+   ========================================================================== */
+
+.inline-group {
+    background: transparent !important;
+    border: none !important;
+    margin-top: 24px !important;
+}
+
+.inline-group h2 {
+    color: #f8fafc !important;
+    font-size: 17px !important;
+    font-weight: 800 !important;
+    padding: 12px 0 !important;
+    background: transparent !important;
+    border-bottom: 2px solid #1e293b !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.inline-related {
+    background: #111827 !important;
+    border: 1px solid #334155 !important;
+    border-radius: 14px !important;
+    margin-bottom: 18px !important;
+    padding: 16px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+    position: relative;
+}
+
+.inline-related h3 {
+    background: #1e293b !important;
+    color: #93c5fd !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    border-radius: 8px;
+    padding: 8px 12px !important;
+    margin: -6px -6px 14px -6px !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inline-related .delete {
+    float: right;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px !important;
+    color: var(--adm-red) !important;
+    font-weight: 700;
+}
+
+.inline-related .delete input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--adm-red);
+}
+
+/* Add another row button */
+.add-row a {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #1e293b !important;
+    border: 1px dashed var(--adm-amber) !important;
+    color: var(--adm-amber) !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    padding: 14px !important;
+    border-radius: 10px !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+}
+
+.add-row a:hover,
+.add-row a:active {
+    background: var(--adm-amber) !important;
+    color: #020617 !important;
+}
+
+/* ==========================================================================
+   STICKY MOBILE BOTTOM SAVE BAR
+   ========================================================================== */
+
+.submit-row {
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+    background: rgba(15, 23, 42, 0.95) !important;
+    backdrop-filter: blur(12px) !important;
+    border-top: 1px solid #334155 !important;
+    border-radius: 14px 14px 0 0 !important;
+    padding: 14px 16px !important;
+    margin: 20px -16px 0 -16px !important;
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.submit-row input[type="submit"] {
+    flex: 1 1 auto;
+    min-height: 48px !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    border-radius: 10px !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.submit-row input.default {
+    background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+    color: #020617 !important;
+    border: none !important;
+    box-shadow: 0 0 14px var(--adm-amber-glow) !important;
+}
+
+.submit-row input.default:hover,
+.submit-row input.default:active {
+    background: #fbbf24 !important;
+    transform: translateY(-1px);
+}
+
+.submit-row input[name="_continue"] {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    border: 1px solid #475569 !important;
+}
+
+.submit-row p.deletelink-box {
+    width: 100%;
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+.submit-row a.deletelink {
+    background: transparent !important;
+    color: var(--adm-red) !important;
+    border: 1px solid rgba(239, 68, 68, 0.4) !important;
+    padding: 10px 16px !important;
+    border-radius: 8px !important;
+    display: block;
+    text-align: center;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVENESS ADJUSTMENTS
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    #content-main {
+        width: 100% !important;
+    }
+
+    .form-row {
+        padding: 10px 0 !important;
+    }
+
+    .admin-live-preview-box img {
+        height: 180px;
+    }
+
+    .submit-row input[type="submit"] {
+        width: 100% !important;
+        margin: 4px 0 !important;
+    }
+}
